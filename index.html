@@ -52,9 +52,9 @@
 
   <meta name="description" content="吃饭、睡觉、写代码、周而复始">
 <meta property="og:type" content="website">
-<meta property="og:title" content="frozen&#39;s notes">
+<meta property="og:title" content="冰封">
 <meta property="og:url" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;index.html">
-<meta property="og:site_name" content="frozen&#39;s notes">
+<meta property="og:site_name" content="冰封">
 <meta property="og:description" content="吃饭、睡觉、写代码、周而复始">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -73,7 +73,7 @@
   };
 </script>
 
-  <title>frozen's notes</title>
+  <title>冰封</title>
   
 
 
@@ -115,14 +115,14 @@
   <div class="site-meta custom-logo">
       <div class="site-meta-headline">
         <a>
-          <img class="custom-logo-image" src="/images/avatar2.gif" alt="frozen's notes">
+          <img class="custom-logo-image" src="/images/avatar2.gif" alt="冰封">
         </a>
       </div>
 
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">frozen's notes</span>
+        <span class="site-title">冰封</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -194,21 +194,207 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/031-ThreadPoolExecutor/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/Synchronized/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/031-ThreadPoolExecutor/" class="post-title-link" itemprop="url">线程池`ThreadPoolExecutor`详解</a>
+            <a href="/2019/10/java/Synchronized/" class="post-title-link" itemprop="url">揭秘`Synchronized`</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-10-28T00:00:00+08:00">2019-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-31 15:12:10" itemprop="dateModified" datetime="2019-10-31T15:12:10+08:00">2019-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h3><h4 id="基本认知"><a href="#基本认知" class="headerlink" title="基本认知"></a>基本认知</h4><ul>
+<li>被用来解决数据共享访问的安全性问题最常见的应用</li>
+</ul>
+<h5 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h5><blockquote>
+<p>不同的修饰类型，代表锁的控制粒度</p>
+</blockquote>
+<ul>
+<li>修饰实例方法<ul>
+<li>作用于当前实例加锁，进入同步代码前要获得当前实例的锁</li>
+</ul>
+</li>
+<li>静态方法<ul>
+<li>作用于当前类对象加锁，进入同步代码前要获得当前类对象的锁</li>
+</ul>
+</li>
+<li>修饰代码块，<ul>
+<li>指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</li>
+</ul>
+</li>
+</ul>
+<h4 id="锁的优化"><a href="#锁的优化" class="headerlink" title="锁的优化"></a>锁的优化</h4><p>旧时代的<code>重量级锁</code>，1.6版本开始为了减少锁竞争的性能开销，引入了偏向锁、轻量级锁的概念；根据竞争的激烈程度锁状态从低到高不断升级。<br>既然是通过锁的状态来进行锁的升级，那么锁是如何存储的呢？</p>
+<h5 id="锁的存储"><a href="#锁的存储" class="headerlink" title="锁的存储"></a>锁的存储</h5><ul>
+<li><p>从synchronized的语法来看是基于lock这个对象的生命周期来控制锁粒度的。</p>
+<blockquote>
+<p>从<code>JVM</code>源码分析能得到<code>Markword</code> （<code>markOop</code>类型），<code>JVM</code>源码自己翻哈</p>
+</blockquote>
+</li>
+<li><p>Mark word记录了对象和锁有关的信息，Mark Word在32位<code>JVM</code>的长度是<code>32bit</code>、在64位<code>JVM</code>的长度是<code>64bit</code>。<br>Mark Word里面存储的数据会随着锁标志位的变化而变化，可分为以下5种情况：</p>
+<img src="/2019/10/java/Synchronized/markWord.png" class="">
+
+</li>
+</ul>
+<h5 id="锁的升级"><a href="#锁的升级" class="headerlink" title="锁的升级"></a>锁的升级</h5><p>锁存在四种状态分别是：无锁、偏向锁、轻量级锁、重量级锁</p>
+<h6 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h6><p>当访问有同步锁的代码块时，会在对象头中存储当前线程的ID，后续该线程再次访问该段同步锁代码时不需要再次加锁和释放锁，而是直接比较对象头里中的线程id。若相等则表示锁是偏向于当前线程的，就不需要再尝试获得锁了</p>
+<ul>
+<li><p><code>锁获取</code></p>
+<ul>
+<li>先获取锁对象的<code>Markword</code> ，判断是否处于可偏向状态。（<code>biased_lock</code>=1、且 <code>ThreadId</code> 为空）</li>
+<li>若是可偏向状态，则通过<code>CAS</code>操作，把当前线程的ID写入到<code>Markword</code> <ul>
+<li><code>CAS</code>成功，则表示已经获得了偏向锁，接着执行同步代码块</li>
+<li><code>CAS</code>失败，则有其他线程已经获得了偏向锁存在锁竞争；<br>  要撤销已获得偏向锁的线程且把它持有的锁升级为轻量级锁（在全局安全点才能操作，也就是没有线程在执行字节码）</li>
+</ul>
+</li>
+<li>若是已偏向状态，则判断<code>Markword</code> 中存储的线程ID是否与当前线程ID相等<ul>
+<li>若相等，则不需要再次获得锁，可直接执行同步代码块</li>
+<li>若不相等，则当前锁偏向于其他线程，需要撤销偏向锁并升级到轻量级锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>锁撤销</code></p>
+<ul>
+<li>本质并不是把对象恢复到无锁可偏向状态，而是在获取过程中存在竞争时是直接把被偏向的锁对象升级到被加了轻量级锁的状态。<br>那么已获得偏向锁的线程有两种情况：<ul>
+<li>若已获得偏向锁的线程已退出临界区则此时会将对象头设置成无锁状态并且竞争锁的线程可以基于CAS重新偏向</li>
+<li>若已获得偏向锁的线程还未退出临界区则此时会把原获得偏向锁的线程升级为轻量级锁后继续执行同步代码块<blockquote>
+<p>临界区可以理解成要同步代码块的区段，进入就是开始执行同步代码块，退出就代码同步代码块执行完毕</p>
+<blockquote>
+<p><code>JVM</code>设置开启或关闭偏向锁：<code>UseBiasedLocking</code></p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h6><ul>
+<li><p>锁升级为轻量级锁之后，对象的 <code>Markword</code> 也会进行相应的变化。过程如下：</p>
+<ul>
+<li>线程在自己的栈桢中创建锁记录 <code>LockRecord</code></li>
+<li>将锁对象的对象头中的 <code>MarkWord</code> 复制到线程的刚刚创建的锁记录中</li>
+<li>将锁记录中的 Owner 指针指向锁对象</li>
+<li>将锁对象的对象头的 <code>MarkWord</code> 替换为指向锁记录的指针 </li>
+</ul>
+</li>
+<li><p><code>锁获取-自旋锁</code></p>
+<ul>
+<li><p>所谓自旋就是指当有竞争锁时，这个线程会在原地循环等待(会消耗<code>cpu</code>)，而不是阻塞，直到那个<br>获得锁的线程释放锁之后，这个线程就可以马上获得锁的。所以轻量级锁适用于那些同步代码块执行的很快的场景可以缩短锁的获取时间。</p>
+<p>自旋锁其实就是<code>空间换时间</code>的操作，<br>但是自旋必须有次数限制否则不断的循环反而会消耗CPU资源。 默认情况下自旋的次数是 10 次，<br>可以通过 <code>preBlockSpin</code> 来修改  </p>
+</li>
+</ul>
+<blockquote>
+<p>在 <code>JDK1.6</code> 之后，引入了自适应自旋锁，即自旋的次数是动态变化的；会根据前一次在同一个锁上自旋的时间以及锁的拥有者的状态来决定。<br>如果在同一个锁对象上，自旋等待刚刚成功获得过锁，并<br>且持有锁的线程正在运行中，那么虚拟机就会认为这次自<br>旋也是很有可能再次成功，进而它将允许自旋等待持续相<br>对更长的时间。如果对于某个锁，自旋很少成功获得过，<br>那在以后尝试获取这个锁时将可能省略掉自旋过程，直接阻塞线程，避免浪费处理器资源 </p>
+</blockquote>
+</li>
+<li><p><code>锁释放</code></p>
+<ul>
+<li><p>锁释放逻辑本质就是锁获取的逆向逻辑，通过<br><code>CAS</code> 操作把线程栈帧中的 <code>LockRecord</code> 替换回到锁对象的<br><code>MarkWord</code> 中，若成功表示没有竞争，若失败表示当前锁存在竞争，那么轻量级锁就会升级成为重量级锁  </p>
+<p>​    </p>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h6><p>到这个阶段就意味着线程只能被挂起阻塞来等待被唤醒了 </p>
+<ul>
+<li><p>在class字节码中可以看到加入同步代码块后会有<code>monitorenter</code> 和 <code>monitorexit</code>  </p>
+<blockquote>
+<p>可以使用以下命令查看: <code>javap -v  xxx.class</code></p>
+</blockquote>
+</li>
+<li><p><code>monitorenter</code> 表示尝试获得一个对象监视器。 <code>monitorexit</code> 表示释放<code>monitor</code>监视器的所有权。<code>monitor</code>依赖操作系统的 <code>MutexLock</code>(互斥锁)实现的，当线程被阻塞后便进入内核态从而导致系统调度要在用户态与内核态之间来回切换，所以性能相对较低</p>
+<blockquote>
+<p>每一个 JAVA 对象都会与一个监视器 monitor 关联（可以理解成一把锁），当一个线程想要执行一段被<br>synchronized 修饰的同步方法或者代码块时，该线程得先获取到 synchronized 修饰的对象对应的 monitor</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>引用一张别人的锁升级流程图–非常完善</p>
+</blockquote>
+<img src="/2019/10/java/Synchronized/synchronize.png" class="">
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/ThreadPoolExecutor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
+      <meta itemprop="name" content="zkzlx">
+      <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰封">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/java/ThreadPoolExecutor/" class="post-title-link" itemprop="url">线程池`ThreadPoolExecutor`详解</a>
         </h1>
 
         <div class="post-meta">
@@ -350,21 +536,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/030-Thread/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/Thread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/030-Thread/" class="post-title-link" itemprop="url">线程你了解有多少？</a>
+            <a href="/2019/10/java/Thread/" class="post-title-link" itemprop="url">线程你了解有多少？</a>
         </h1>
 
         <div class="post-meta">
@@ -381,7 +567,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-29 17:48:28" itemprop="dateModified" datetime="2019-10-29T17:48:28+08:00">2019-10-29</time>
+                <time title="修改时间：2019-10-31 15:12:10" itemprop="dateModified" datetime="2019-10-31T15:12:10+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -461,7 +647,11 @@
 <blockquote>
 <p>线程的生命周期图例</p>
 </blockquote>
-<p><img src="assets/thread-state.png" alt=""></p>
+<img src="/2019/10/java/Thread/thread-state.png" class="">
+
+
+
+
 
       
     </div>
@@ -481,21 +671,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/021-HashMap/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/HashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/021-HashMap/" class="post-title-link" itemprop="url">HashMap源码分析</a>
+            <a href="/2019/10/java/HashMap/" class="post-title-link" itemprop="url">HashMap源码分析</a>
         </h1>
 
         <div class="post-meta">
@@ -683,21 +873,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/020-List/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/List/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/020-List/" class="post-title-link" itemprop="url">ArrayList与LinkedList</a>
+            <a href="/2019/10/java/List/" class="post-title-link" itemprop="url">ArrayList与LinkedList</a>
         </h1>
 
         <div class="post-meta">
@@ -778,21 +968,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/011-classloader/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/classLoader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/011-classloader/" class="post-title-link" itemprop="url">Java类加载机制</a>
+            <a href="/2019/10/java/classLoader/" class="post-title-link" itemprop="url">classLoader</a>
         </h1>
 
         <div class="post-meta">
@@ -809,7 +999,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-29 17:48:02" itemprop="dateModified" datetime="2019-10-29T17:48:02+08:00">2019-10-29</time>
+                <time title="修改时间：2019-10-31 15:11:03" itemprop="dateModified" datetime="2019-10-31T15:11:03+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -835,7 +1025,8 @@
 
       
           <h2 id="Java类加载机制"><a href="#Java类加载机制" class="headerlink" title="Java类加载机制"></a>Java类加载机制</h2><h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><p>共有五个过程:</p>
-<p><img src="assets/010-jvm/classLoad.png" alt=""></p>
+<img src="/2019/10/java/classLoader/classLoader.png" class="">
+
 <h4 id="加载-Loading"><a href="#加载-Loading" class="headerlink" title="加载-Loading"></a>加载-Loading</h4><p>加载是类加载过程中的一个阶段， 这个阶段会在内存中生成一个代表这个类的 <code>java.lang.Class</code> 对<br>象， 作为<strong>方法区</strong>这个类的各种数据的入口。</p>
 <blockquote>
 <p>  这里不一定要从 Class 文件获取，这里既<br>  可以从 ZIP 包中读取（比如从 jar 包和 war 包中读取），也可以在运行时计算生成（动态代理），<br>  也可以由其它文件生成（比如将 JSP 文件转换成对应的 Class 类）。 </p>
@@ -871,13 +1062,17 @@
 <li>通过 <code>ClassLoader</code> 默认的 <code>loadClass</code> 方法，也不会触发初始化动作。 </li>
 </ol>
 <h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>JVM 通过双亲委派模型进行类的加载， 当然我们也可以通过继承 <code>java.lang.ClassLoader</code><br>实现自定义的类加载器。 </p>
-<p><img src="assets/010-jvm/loader.png" alt=""></p>
+<img src="/2019/10/java/classLoader/loader.png" class="">
+
 <h4 id="启动类加载器-Bootstrap-ClassLoader"><a href="#启动类加载器-Bootstrap-ClassLoader" class="headerlink" title="启动类加载器(Bootstrap ClassLoader)"></a>启动类加载器(Bootstrap ClassLoader)</h4><p>负责加载 JAVA_HOME\lib 目录中的， 或通过-Xbootclasspath 参数指定路径中的， 且被<br>虚拟机认可（按文件名识别， 如 rt.jar） 的类。 </p>
 <h4 id="扩展类加载器-Extension-ClassLoader"><a href="#扩展类加载器-Extension-ClassLoader" class="headerlink" title="扩展类加载器(Extension ClassLoader)"></a>扩展类加载器(Extension ClassLoader)</h4><p>负责加载 JAVA_HOME\lib\ext 目录中的，或通过 java.ext.dirs 系统变量指定路径中的类<br>库。 </p>
 <h4 id="应用程序类加载器-Application-ClassLoader"><a href="#应用程序类加载器-Application-ClassLoader" class="headerlink" title="应用程序类加载器(Application ClassLoader)"></a>应用程序类加载器(Application ClassLoader)</h4><p>负责加载用户路径（classpath）上的类库。 </p>
 <h3 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h3><p>当一个类收到了类加载请求，首先不会尝试自己去加载这个类，而是把这个请求委派给父<br>类去完成，每个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，<br>只有当父类加载器反馈自己无法完成这个请求的时候（在它的加载路径下没有找到所需加载的<br>Class）， 子类加载器才会尝试自己去加载。</p>
 <p>采用双亲委派的一个好处是比如加载位于 rt.jar 包中的类 <code>java.lang.Object</code>，不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，这样就保证了使用不同的类加载器最终得到的都是同样一个 Object 对象 </p>
-<p><img src="assets/010-jvm/parentsDelegate.png" alt=""></p>
+<img src="/2019/10/java/classLoader/parentsDelegate.png" class="">
+
+
+
 
       
     </div>
@@ -897,21 +1092,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/010-jvm/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/jvm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/10/010-jvm/" class="post-title-link" itemprop="url">JAVA虚拟机</a>
+            <a href="/2019/10/java/jvm/" class="post-title-link" itemprop="url">JAVA虚拟机</a>
         </h1>
 
         <div class="post-meta">
@@ -928,7 +1123,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-29 17:48:09" itemprop="dateModified" datetime="2019-10-29T17:48:09+08:00">2019-10-29</time>
+                <time title="修改时间：2019-10-31 15:10:07" itemprop="dateModified" datetime="2019-10-31T15:10:07+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -957,7 +1152,8 @@
 <li>是可运行java代码的虚拟机,它包括一套字节指令集,一组寄存器,一个垃圾回收,一个方法存储域,一个栈和一个堆.</li>
 <li>它是一种软件,运行在操作系统中,与硬件没有直接交互</li>
 </ul>
-<h2 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h2><p><img src="assets/010-jvm/jvm-1.png" alt="大概图"></p>
+<h2 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h2><img src="/2019/10/java/jvm/jvm-1.png" class="">
+
 <ul>
 <li>Java源文件通过编译器生成对应的.class字节码文件,而字节码文件通过JVM中加载器和解释器生成对应机器上的机器码,从而通过系统被执行</li>
 <li>大致过程如下:<ul>
@@ -1016,10 +1212,13 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/010-jvm/memory.png" alt=""></p>
+<img src="/2019/10/java/jvm/memory.png" class="">
+
 <hr>
 <h3 id="运行时内存"><a href="#运行时内存" class="headerlink" title="运行时内存"></a>运行时内存</h3><p>区域划分大致如下:</p>
-<p><img src="assets/010-jvm/heap-1.png" alt=""></p>
+<img src="/2019/10/java/jvm/heap-1.png" class="">
+
+
 <h5 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h5><ul>
 <li>Eden<ul>
 <li>Java新对象的出生地.当Eden区内存不够的时候就会触发MinorGC,对新生代区进行一次垃圾回收<ul>
@@ -1131,7 +1330,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/010-jvm/Roots.png" alt="img"></p>
+<img src="/2019/10/java/jvm/Roots.png" class="">
 <p>  </p>
 <h5 id="最终判定"><a href="#最终判定" class="headerlink" title="最终判定"></a><strong>最终判定</strong></h5><p>   即使在可达性分析算法中不可达的对象，也并非是“非死不可”的，这时候它们暂时处于“缓刑”阶段，要真正宣告一个对象死亡，至少要经历再次标记过程。</p>
 <p>标记的前提是对象在进行可达性分析后发现没有与GC Roots相连接的引用链。</p>
@@ -1157,8 +1356,10 @@
 <li>该类对应的<code>java.lang.Class</code>对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
 </ul>
 <p>流程图如下：  </p>
-<p><img src="assets/010-jvm/gcRoots.png" alt=""></p>
-<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="串行收集器"><a href="#串行收集器" class="headerlink" title="串行收集器"></a>串行收集器</h5><p><img src="assets/010-jvm/serialGC.png" alt="串行收集器组合"></p>
+<img src="/2019/10/java/jvm/gcRoots.png" class="">
+
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="串行收集器"><a href="#串行收集器" class="headerlink" title="串行收集器"></a>串行收集器</h5><img src="/2019/10/java/jvm/serialGC.png" class="">
+
 <ul>
 <li><p>串行收集器组合 Serial + Serial Old </p>
 <blockquote>
@@ -1174,7 +1375,8 @@
 </ul>
 </li>
 </ul>
-<h5 id="并行收集器"><a href="#并行收集器" class="headerlink" title="并行收集器"></a>并行收集器</h5><p><img src="assets/010-jvm/useParallelGC.png" alt="并行收集器组合"></p>
+<h5 id="并行收集器"><a href="#并行收集器" class="headerlink" title="并行收集器"></a>并行收集器</h5><img src="/2019/10/java/jvm/useParallelGC.png" class="">
+
 <ul>
 <li><p>并行收集器组合 Parallel Scavenge + Parallel Old</p>
 <blockquote>
@@ -1190,7 +1392,8 @@
 </ul>
 </li>
 </ul>
-<h5 id="并发标记清除收集器"><a href="#并发标记清除收集器" class="headerlink" title="并发标记清除收集器"></a>并发标记清除收集器</h5><p><img src="assets/010-jvm/useConcMarkSweepGC.png" alt="并发标记清除收集器组合"></p>
+<h5 id="并发标记清除收集器"><a href="#并发标记清除收集器" class="headerlink" title="并发标记清除收集器"></a>并发标记清除收集器</h5><img src="/2019/10/java/jvm/useConcMarkSweepGC.png" class="">
+
 <ul>
 <li><p>并发标记清除收集器组合 ParNew + CMS + Serial Old</p>
 <blockquote>
@@ -1232,7 +1435,8 @@
 <li><p>都是以尽可能少而块地执行GC为设计原则。</p>
 </li>
 </ul>
-<h5 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First (G1)收集器"></a>Garbage First (G1)收集器</h5><p><img src="assets/010-jvm/useG1GC.png" alt="G1收集器"></p>
+<h5 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First (G1)收集器"></a>Garbage First (G1)收集器</h5><img src="/2019/10/java/jvm/useG1GC.png" class="">
+
 <blockquote>
 <p>  开启选项：-XX:+UseG1GC</p>
 </blockquote>
@@ -1263,7 +1467,9 @@
 </ul>
 <p><strong>G1的内存模型</strong></p>
 <p>分区概念</p>
-<p><img src="assets/010-jvm/G1Region.png" alt="G1分区示意图"></p>
+<img src="/2019/10/java/jvm/G1Region.png" class="">
+
+
 <ul>
 <li>G1采用了分区(Region)的思路，将整个堆空间分成若干个大小相等的内存区域，每次分配对象空间将逐段地使用内存。</li>
 <li>在堆的使用上，G1并不要求对象的存储一定是物理上连续的，只要逻辑上连续即可；</li>
@@ -1280,14 +1486,18 @@
 <p>标记-清除算法不需要进行对象的移动，只需对不存活的对象进行处理，在存活对象比较多的情况下极为高效，但由于标记-清除算法直接回收不存活的对象，因此会造成内存碎片。</p>
 </li>
 </ul>
-<p><img src="assets/010-jvm/concMarkSweep.png" alt="img"></p>
+<img src="/2019/10/java/jvm/concMarkSweep.png" class="">
+
 <h5 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h5><p>  复制算法的提出是为了克服句柄的开销和解决内存碎片的问题。它开始时把堆分成 一个对象 面和多个空闲面， 程序从对象面为对象分配空间，当对象满了，基于copying算法的垃圾 收集就从根集合（GC Roots）中扫描活动对象，并将每个 活动对象复制到空闲面(使得活动对象所占的内存之间没有空闲洞)，这样空闲面变成了对象面，原来的对象面变成了空闲面，程序会在新的对象面中分配内存。</p>
-<p><img src="assets/010-jvm/copy.png" alt="img"></p>
+<img src="/2019/10/java/jvm/copy.png" class="">
+
 <h5 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h5><p>  标记-整理算法采用标记-清除算法一样的方式进行对象的标记，但在清除时不同，在回收不存活的对象占用的空间后，会将所有的存活对象往左端空闲空间移动，并更新对应的指针。</p>
 <p>标记-整理算法是在标记-清除算法的基础上，又进行了对象的移动，因此成本更高，但是却解决了内存碎片的问题。具体流程见下图：</p>
-<p><img src="assets/010-jvm/Mark-Compact.jpg" alt="img"></p>
+<img src="/2019/10/java/jvm/Mark-Compact.jpg" class="">
+
 <h5 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h5><p>  分代收集算法是目前大部分JVM的垃圾收集器采用的算法。它的核心思想是根据对象存活的生命周期将内存划分为若干个不同的区域。一般情况下将堆区划分为老年代（Tenured Generation）和新生代（Young Generation），在堆区之外还有一个代就是永久代（Permanet Generation）。老年代的特点是每次垃圾收集时只有少量对象需要被回收，而新生代的特点是每次垃圾回收时都有大量的对象需要被回收，那么就可以根据不同代的特点采取最适合的收集算法。</p>
-<p><img src="assets/010-jvm/generational-collection.png" alt="img"></p>
+<img src="/2019/10/java/jvm/generational-collection.png" class="">
+
 <ul>
 <li><p><strong>年轻代（Young Generation）的回收算法</strong></p>
 <ul>
@@ -1311,7 +1521,8 @@
 </ul>
 <p>  用于存放静态文件，如Java类、方法等。持久代对垃圾回收没有显著影响，但是有些应用可能动态生成或者调用一些class，在这种时候需要设置一个比较大的持久代空间来存放这些运行过程中新增的类。持久代也称方法区</p>
 <h4 id="常见的垃圾收集器"><a href="#常见的垃圾收集器" class="headerlink" title="常见的垃圾收集器"></a>常见的垃圾收集器</h4><p>下面一张图是HotSpot虚拟机包含的所有收集器，图是借用过来滴：</p>
-<p><img src="assets/010-jvm/HotSpot-collection.png" alt="img"></p>
+<img src="/2019/10/java/jvm/HotSpot-collection.png" class="">
+
 <ul>
 <li>Serial收集器（复制算法)<br>新生代单线程收集器，标记和清理都是单线程，优点是简单高效。是client级别默认的GC方式，可以通过<code>-XX:+UseSerialGC</code>来强制指定。</li>
 <li>Serial Old收集器(标记-整理算法)<br>老年代单线程收集器，Serial收集器的老年代版本。</li>
@@ -1403,7 +1614,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <img class="site-author-image" itemprop="image" alt="zkzlx"
-    src="/uploads/custom-logo.jpg">
+    src="/images/custom-logo.jpg">
   <p class="site-author-name" itemprop="name">zkzlx</p>
   <div class="site-description" itemprop="description">吃饭、睡觉、写代码、周而复始</div>
 </div>
@@ -1412,7 +1623,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1425,7 +1636,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

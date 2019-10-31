@@ -50,22 +50,22 @@
   };
 </script>
 
-  <meta name="description" content="Java类加载机制类加载过程共有五个过程:  加载-Loading加载是类加载过程中的一个阶段， 这个阶段会在内存中生成一个代表这个类的 java.lang.Class 对象， 作为方法区这个类的各种数据的入口。    这里不一定要从 Class 文件获取，这里既  可以从 ZIP 包中读取（比如从 jar 包和 war 包中读取），也可以在运行时计算生成（动态代理），  也可以由其它文件生成（比">
+  <meta name="description" content="Java类加载机制类加载过程共有五个过程:   加载-Loading加载是类加载过程中的一个阶段， 这个阶段会在内存中生成一个代表这个类的 java.lang.Class 对象， 作为方法区这个类的各种数据的入口。    这里不一定要从 Class 文件获取，这里既  可以从 ZIP 包中读取（比如从 jar 包和 war 包中读取），也可以在运行时计算生成（动态代理），  也可以由其它文件生成（">
 <meta name="keywords" content="jvm,类加载">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java类加载机制">
-<meta property="og:url" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;011-classloader&#x2F;index.html">
-<meta property="og:site_name" content="frozen&#39;s notes">
-<meta property="og:description" content="Java类加载机制类加载过程共有五个过程:  加载-Loading加载是类加载过程中的一个阶段， 这个阶段会在内存中生成一个代表这个类的 java.lang.Class 对象， 作为方法区这个类的各种数据的入口。    这里不一定要从 Class 文件获取，这里既  可以从 ZIP 包中读取（比如从 jar 包和 war 包中读取），也可以在运行时计算生成（动态代理），  也可以由其它文件生成（比">
+<meta property="og:title" content="classLoader">
+<meta property="og:url" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;classLoader&#x2F;index.html">
+<meta property="og:site_name" content="冰封">
+<meta property="og:description" content="Java类加载机制类加载过程共有五个过程:   加载-Loading加载是类加载过程中的一个阶段， 这个阶段会在内存中生成一个代表这个类的 java.lang.Class 对象， 作为方法区这个类的各种数据的入口。    这里不一定要从 Class 文件获取，这里既  可以从 ZIP 包中读取（比如从 jar 包和 war 包中读取），也可以在运行时计算生成（动态代理），  也可以由其它文件生成（">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;011-classloader&#x2F;assets&#x2F;010-jvm&#x2F;classLoad.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;011-classloader&#x2F;assets&#x2F;010-jvm&#x2F;loader.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;011-classloader&#x2F;assets&#x2F;010-jvm&#x2F;parentsDelegate.png">
-<meta property="og:updated_time" content="2019-10-29T09:48:02.322Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;classLoader&#x2F;classLoader.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;classLoader&#x2F;loader.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;classLoader&#x2F;parentsDelegate.png">
+<meta property="og:updated_time" content="2019-10-31T07:11:03.580Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;011-classloader&#x2F;assets&#x2F;010-jvm&#x2F;classLoad.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;classLoader&#x2F;classLoader.png">
 
-<link rel="canonical" href="https://zkzlx.github.io/2019/10/011-classloader/">
+<link rel="canonical" href="https://zkzlx.github.io/2019/10/java/classLoader/">
 
 
 <script id="page-configurations">
@@ -79,7 +79,7 @@
   };
 </script>
 
-  <title>Java类加载机制 | frozen's notes</title>
+  <title>classLoader | 冰封</title>
   
 
 
@@ -121,14 +121,14 @@
   <div class="site-meta custom-logo">
       <div class="site-meta-headline">
         <a>
-          <img class="custom-logo-image" src="/images/avatar2.gif" alt="frozen's notes">
+          <img class="custom-logo-image" src="/images/avatar2.gif" alt="冰封">
         </a>
       </div>
 
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">frozen's notes</span>
+        <span class="site-title">冰封</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -200,20 +200,20 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/011-classloader/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/classLoader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java类加载机制
+          classLoader
         </h1>
 
         <div class="post-meta">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-29 17:48:02" itemprop="dateModified" datetime="2019-10-29T17:48:02+08:00">2019-10-29</time>
+                <time title="修改时间：2019-10-31 15:11:03" itemprop="dateModified" datetime="2019-10-31T15:11:03+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +256,8 @@
 
       
         <h2 id="Java类加载机制"><a href="#Java类加载机制" class="headerlink" title="Java类加载机制"></a>Java类加载机制</h2><h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><p>共有五个过程:</p>
-<p><img src="assets/010-jvm/classLoad.png" alt=""></p>
+<img src="/2019/10/java/classLoader/classLoader.png" class="">
+
 <h4 id="加载-Loading"><a href="#加载-Loading" class="headerlink" title="加载-Loading"></a>加载-Loading</h4><p>加载是类加载过程中的一个阶段， 这个阶段会在内存中生成一个代表这个类的 <code>java.lang.Class</code> 对<br>象， 作为<strong>方法区</strong>这个类的各种数据的入口。</p>
 <blockquote>
 <p>  这里不一定要从 Class 文件获取，这里既<br>  可以从 ZIP 包中读取（比如从 jar 包和 war 包中读取），也可以在运行时计算生成（动态代理），<br>  也可以由其它文件生成（比如将 JSP 文件转换成对应的 Class 类）。 </p>
@@ -292,13 +293,17 @@
 <li>通过 <code>ClassLoader</code> 默认的 <code>loadClass</code> 方法，也不会触发初始化动作。 </li>
 </ol>
 <h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>JVM 通过双亲委派模型进行类的加载， 当然我们也可以通过继承 <code>java.lang.ClassLoader</code><br>实现自定义的类加载器。 </p>
-<p><img src="assets/010-jvm/loader.png" alt=""></p>
+<img src="/2019/10/java/classLoader/loader.png" class="">
+
 <h4 id="启动类加载器-Bootstrap-ClassLoader"><a href="#启动类加载器-Bootstrap-ClassLoader" class="headerlink" title="启动类加载器(Bootstrap ClassLoader)"></a>启动类加载器(Bootstrap ClassLoader)</h4><p>负责加载 JAVA_HOME\lib 目录中的， 或通过-Xbootclasspath 参数指定路径中的， 且被<br>虚拟机认可（按文件名识别， 如 rt.jar） 的类。 </p>
 <h4 id="扩展类加载器-Extension-ClassLoader"><a href="#扩展类加载器-Extension-ClassLoader" class="headerlink" title="扩展类加载器(Extension ClassLoader)"></a>扩展类加载器(Extension ClassLoader)</h4><p>负责加载 JAVA_HOME\lib\ext 目录中的，或通过 java.ext.dirs 系统变量指定路径中的类<br>库。 </p>
 <h4 id="应用程序类加载器-Application-ClassLoader"><a href="#应用程序类加载器-Application-ClassLoader" class="headerlink" title="应用程序类加载器(Application ClassLoader)"></a>应用程序类加载器(Application ClassLoader)</h4><p>负责加载用户路径（classpath）上的类库。 </p>
 <h3 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h3><p>当一个类收到了类加载请求，首先不会尝试自己去加载这个类，而是把这个请求委派给父<br>类去完成，每个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，<br>只有当父类加载器反馈自己无法完成这个请求的时候（在它的加载路径下没有找到所需加载的<br>Class）， 子类加载器才会尝试自己去加载。</p>
 <p>采用双亲委派的一个好处是比如加载位于 rt.jar 包中的类 <code>java.lang.Object</code>，不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，这样就保证了使用不同的类加载器最终得到的都是同样一个 Object 对象 </p>
-<p><img src="assets/010-jvm/parentsDelegate.png" alt=""></p>
+<img src="/2019/10/java/classLoader/parentsDelegate.png" class="">
+
+
+
 
     </div>
 
@@ -316,7 +321,7 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/010-jvm/" rel="next" title="JAVA虚拟机">
+                <a href="/2019/10/java/jvm/" rel="next" title="JAVA虚拟机">
                   <i class="fa fa-chevron-left"></i> JAVA虚拟机
                 </a>
             </div>
@@ -324,7 +329,7 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/020-List/" rel="prev" title="ArrayList与LinkedList">
+                <a href="/2019/10/java/List/" rel="prev" title="ArrayList与LinkedList">
                   ArrayList与LinkedList <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -372,7 +377,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <img class="site-author-image" itemprop="image" alt="zkzlx"
-    src="/uploads/custom-logo.jpg">
+    src="/images/custom-logo.jpg">
   <p class="site-author-name" itemprop="name">zkzlx</p>
   <div class="site-description" itemprop="description">吃饭、睡觉、写代码、周而复始</div>
 </div>
@@ -381,7 +386,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -394,7 +399,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

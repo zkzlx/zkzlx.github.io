@@ -54,14 +54,14 @@
 <meta name="keywords" content="集合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap源码分析">
-<meta property="og:url" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;021-HashMap&#x2F;index.html">
-<meta property="og:site_name" content="frozen&#39;s notes">
+<meta property="og:url" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;HashMap&#x2F;index.html">
+<meta property="og:site_name" content="冰封">
 <meta property="og:description" content="HashMap源码分析1、实现原理概括 HashMap是一个关联数组、哈希表，它是线程不安全的，允许key为null,value为null。遍历时无序  使用拉链法实现哈希表，结合了数组与链表的特点  数组的特点是空间连续（大小固定）、寻址迅速，但是插入和删除时需要移动元素，所以查询快，增加删除慢 链表可动态增加或减少空间以适应新增和删除元素，但查找时只能顺着一个个节点查找，所以增加删除快，查找慢">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-10-29T09:48:21.411Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://zkzlx.github.io/2019/10/021-HashMap/">
+<link rel="canonical" href="https://zkzlx.github.io/2019/10/java/HashMap/">
 
 
 <script id="page-configurations">
@@ -75,7 +75,7 @@
   };
 </script>
 
-  <title>HashMap源码分析 | frozen's notes</title>
+  <title>HashMap源码分析 | 冰封</title>
   
 
 
@@ -117,14 +117,14 @@
   <div class="site-meta custom-logo">
       <div class="site-meta-headline">
         <a>
-          <img class="custom-logo-image" src="/images/avatar2.gif" alt="frozen's notes">
+          <img class="custom-logo-image" src="/images/avatar2.gif" alt="冰封">
         </a>
       </div>
 
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">frozen's notes</span>
+        <span class="site-title">冰封</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -196,16 +196,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/021-HashMap/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/HashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -394,7 +394,7 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/020-List/" rel="next" title="ArrayList与LinkedList">
+                <a href="/2019/10/java/List/" rel="next" title="ArrayList与LinkedList">
                   <i class="fa fa-chevron-left"></i> ArrayList与LinkedList
                 </a>
             </div>
@@ -402,7 +402,7 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/030-Thread/" rel="prev" title="线程你了解有多少？">
+                <a href="/2019/10/java/Thread/" rel="prev" title="线程你了解有多少？">
                   线程你了解有多少？ <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -450,7 +450,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <img class="site-author-image" itemprop="image" alt="zkzlx"
-    src="/uploads/custom-logo.jpg">
+    src="/images/custom-logo.jpg">
   <p class="site-author-name" itemprop="name">zkzlx</p>
   <div class="site-description" itemprop="description">吃饭、睡觉、写代码、周而复始</div>
 </div>
@@ -459,7 +459,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -472,7 +472,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

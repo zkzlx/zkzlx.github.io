@@ -50,34 +50,34 @@
   };
 </script>
 
-  <meta name="description" content="JAVA虚拟机概念 是可运行java代码的虚拟机,它包括一套字节指令集,一组寄存器,一个垃圾回收,一个方法存储域,一个栈和一个堆. 它是一种软件,运行在操作系统中,与硬件没有直接交互  运行过程  Java源文件通过编译器生成对应的.class字节码文件,而字节码文件通过JVM中加载器和解释器生成对应机器上的机器码,从而通过系统被执行 大致过程如下: Java源文件–-&amp;gt;编译器–&amp;gt;字节">
+  <meta name="description" content="JAVA虚拟机概念 是可运行java代码的虚拟机,它包括一套字节指令集,一组寄存器,一个垃圾回收,一个方法存储域,一个栈和一个堆. 它是一种软件,运行在操作系统中,与硬件没有直接交互  运行过程   Java源文件通过编译器生成对应的.class字节码文件,而字节码文件通过JVM中加载器和解释器生成对应机器上的机器码,从而通过系统被执行 大致过程如下: Java源文件–-&amp;gt;编译器–&amp;gt;字">
 <meta name="keywords" content="jvm,gc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA虚拟机">
-<meta property="og:url" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;index.html">
-<meta property="og:site_name" content="frozen&#39;s notes">
-<meta property="og:description" content="JAVA虚拟机概念 是可运行java代码的虚拟机,它包括一套字节指令集,一组寄存器,一个垃圾回收,一个方法存储域,一个栈和一个堆. 它是一种软件,运行在操作系统中,与硬件没有直接交互  运行过程  Java源文件通过编译器生成对应的.class字节码文件,而字节码文件通过JVM中加载器和解释器生成对应机器上的机器码,从而通过系统被执行 大致过程如下: Java源文件–-&amp;gt;编译器–&amp;gt;字节">
+<meta property="og:url" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;index.html">
+<meta property="og:site_name" content="冰封">
+<meta property="og:description" content="JAVA虚拟机概念 是可运行java代码的虚拟机,它包括一套字节指令集,一组寄存器,一个垃圾回收,一个方法存储域,一个栈和一个堆. 它是一种软件,运行在操作系统中,与硬件没有直接交互  运行过程   Java源文件通过编译器生成对应的.class字节码文件,而字节码文件通过JVM中加载器和解释器生成对应机器上的机器码,从而通过系统被执行 大致过程如下: Java源文件–-&amp;gt;编译器–&amp;gt;字">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;jvm-1.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;memory.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;heap-1.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;Roots.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;gcRoots.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;serialGC.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;useParallelGC.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;useConcMarkSweepGC.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;useG1GC.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;G1Region.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;concMarkSweep.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;copy.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;Mark-Compact.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;generational-collection.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;HotSpot-collection.png">
-<meta property="og:updated_time" content="2019-10-29T09:48:09.383Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;jvm-1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;memory.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;heap-1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;Roots.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;gcRoots.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;serialGC.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;useParallelGC.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;useConcMarkSweepGC.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;useG1GC.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;G1Region.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;concMarkSweep.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;copy.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;Mark-Compact.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;generational-collection.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;HotSpot-collection.png">
+<meta property="og:updated_time" content="2019-10-31T07:10:07.646Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;010-jvm&#x2F;assets&#x2F;010-jvm&#x2F;jvm-1.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;zkzlx.github.io&#x2F;2019&#x2F;10&#x2F;java&#x2F;jvm&#x2F;jvm-1.png">
 
-<link rel="canonical" href="https://zkzlx.github.io/2019/10/010-jvm/">
+<link rel="canonical" href="https://zkzlx.github.io/2019/10/java/jvm/">
 
 
 <script id="page-configurations">
@@ -91,7 +91,7 @@
   };
 </script>
 
-  <title>JAVA虚拟机 | frozen's notes</title>
+  <title>JAVA虚拟机 | 冰封</title>
   
 
 
@@ -133,14 +133,14 @@
   <div class="site-meta custom-logo">
       <div class="site-meta-headline">
         <a>
-          <img class="custom-logo-image" src="/images/avatar2.gif" alt="frozen's notes">
+          <img class="custom-logo-image" src="/images/avatar2.gif" alt="冰封">
         </a>
       </div>
 
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">frozen's notes</span>
+        <span class="site-title">冰封</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -212,16 +212,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/010-jvm/">
+    <link itemprop="mainEntityOfPage" href="https://zkzlx.github.io/2019/10/java/jvm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="image" content="/images/custom-logo.jpg">
       <meta itemprop="name" content="zkzlx">
       <meta itemprop="description" content="吃饭、睡觉、写代码、周而复始">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frozen's notes">
+      <meta itemprop="name" content="冰封">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -242,7 +242,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-29 17:48:09" itemprop="dateModified" datetime="2019-10-29T17:48:09+08:00">2019-10-29</time>
+                <time title="修改时间：2019-10-31 15:10:07" itemprop="dateModified" datetime="2019-10-31T15:10:07+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,7 +271,8 @@
 <li>是可运行java代码的虚拟机,它包括一套字节指令集,一组寄存器,一个垃圾回收,一个方法存储域,一个栈和一个堆.</li>
 <li>它是一种软件,运行在操作系统中,与硬件没有直接交互</li>
 </ul>
-<h2 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h2><p><img src="assets/010-jvm/jvm-1.png" alt="大概图"></p>
+<h2 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h2><img src="/2019/10/java/jvm/jvm-1.png" class="">
+
 <ul>
 <li>Java源文件通过编译器生成对应的.class字节码文件,而字节码文件通过JVM中加载器和解释器生成对应机器上的机器码,从而通过系统被执行</li>
 <li>大致过程如下:<ul>
@@ -330,10 +331,13 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/010-jvm/memory.png" alt=""></p>
+<img src="/2019/10/java/jvm/memory.png" class="">
+
 <hr>
 <h3 id="运行时内存"><a href="#运行时内存" class="headerlink" title="运行时内存"></a>运行时内存</h3><p>区域划分大致如下:</p>
-<p><img src="assets/010-jvm/heap-1.png" alt=""></p>
+<img src="/2019/10/java/jvm/heap-1.png" class="">
+
+
 <h5 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h5><ul>
 <li>Eden<ul>
 <li>Java新对象的出生地.当Eden区内存不够的时候就会触发MinorGC,对新生代区进行一次垃圾回收<ul>
@@ -445,7 +449,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/010-jvm/Roots.png" alt="img"></p>
+<img src="/2019/10/java/jvm/Roots.png" class="">
 <p>  </p>
 <h5 id="最终判定"><a href="#最终判定" class="headerlink" title="最终判定"></a><strong>最终判定</strong></h5><p>   即使在可达性分析算法中不可达的对象，也并非是“非死不可”的，这时候它们暂时处于“缓刑”阶段，要真正宣告一个对象死亡，至少要经历再次标记过程。</p>
 <p>标记的前提是对象在进行可达性分析后发现没有与GC Roots相连接的引用链。</p>
@@ -471,8 +475,10 @@
 <li>该类对应的<code>java.lang.Class</code>对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
 </ul>
 <p>流程图如下：  </p>
-<p><img src="assets/010-jvm/gcRoots.png" alt=""></p>
-<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="串行收集器"><a href="#串行收集器" class="headerlink" title="串行收集器"></a>串行收集器</h5><p><img src="assets/010-jvm/serialGC.png" alt="串行收集器组合"></p>
+<img src="/2019/10/java/jvm/gcRoots.png" class="">
+
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="串行收集器"><a href="#串行收集器" class="headerlink" title="串行收集器"></a>串行收集器</h5><img src="/2019/10/java/jvm/serialGC.png" class="">
+
 <ul>
 <li><p>串行收集器组合 Serial + Serial Old </p>
 <blockquote>
@@ -488,7 +494,8 @@
 </ul>
 </li>
 </ul>
-<h5 id="并行收集器"><a href="#并行收集器" class="headerlink" title="并行收集器"></a>并行收集器</h5><p><img src="assets/010-jvm/useParallelGC.png" alt="并行收集器组合"></p>
+<h5 id="并行收集器"><a href="#并行收集器" class="headerlink" title="并行收集器"></a>并行收集器</h5><img src="/2019/10/java/jvm/useParallelGC.png" class="">
+
 <ul>
 <li><p>并行收集器组合 Parallel Scavenge + Parallel Old</p>
 <blockquote>
@@ -504,7 +511,8 @@
 </ul>
 </li>
 </ul>
-<h5 id="并发标记清除收集器"><a href="#并发标记清除收集器" class="headerlink" title="并发标记清除收集器"></a>并发标记清除收集器</h5><p><img src="assets/010-jvm/useConcMarkSweepGC.png" alt="并发标记清除收集器组合"></p>
+<h5 id="并发标记清除收集器"><a href="#并发标记清除收集器" class="headerlink" title="并发标记清除收集器"></a>并发标记清除收集器</h5><img src="/2019/10/java/jvm/useConcMarkSweepGC.png" class="">
+
 <ul>
 <li><p>并发标记清除收集器组合 ParNew + CMS + Serial Old</p>
 <blockquote>
@@ -546,7 +554,8 @@
 <li><p>都是以尽可能少而块地执行GC为设计原则。</p>
 </li>
 </ul>
-<h5 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First (G1)收集器"></a>Garbage First (G1)收集器</h5><p><img src="assets/010-jvm/useG1GC.png" alt="G1收集器"></p>
+<h5 id="Garbage-First-G1-收集器"><a href="#Garbage-First-G1-收集器" class="headerlink" title="Garbage First (G1)收集器"></a>Garbage First (G1)收集器</h5><img src="/2019/10/java/jvm/useG1GC.png" class="">
+
 <blockquote>
 <p>  开启选项：-XX:+UseG1GC</p>
 </blockquote>
@@ -577,7 +586,9 @@
 </ul>
 <p><strong>G1的内存模型</strong></p>
 <p>分区概念</p>
-<p><img src="assets/010-jvm/G1Region.png" alt="G1分区示意图"></p>
+<img src="/2019/10/java/jvm/G1Region.png" class="">
+
+
 <ul>
 <li>G1采用了分区(Region)的思路，将整个堆空间分成若干个大小相等的内存区域，每次分配对象空间将逐段地使用内存。</li>
 <li>在堆的使用上，G1并不要求对象的存储一定是物理上连续的，只要逻辑上连续即可；</li>
@@ -594,14 +605,18 @@
 <p>标记-清除算法不需要进行对象的移动，只需对不存活的对象进行处理，在存活对象比较多的情况下极为高效，但由于标记-清除算法直接回收不存活的对象，因此会造成内存碎片。</p>
 </li>
 </ul>
-<p><img src="assets/010-jvm/concMarkSweep.png" alt="img"></p>
+<img src="/2019/10/java/jvm/concMarkSweep.png" class="">
+
 <h5 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h5><p>  复制算法的提出是为了克服句柄的开销和解决内存碎片的问题。它开始时把堆分成 一个对象 面和多个空闲面， 程序从对象面为对象分配空间，当对象满了，基于copying算法的垃圾 收集就从根集合（GC Roots）中扫描活动对象，并将每个 活动对象复制到空闲面(使得活动对象所占的内存之间没有空闲洞)，这样空闲面变成了对象面，原来的对象面变成了空闲面，程序会在新的对象面中分配内存。</p>
-<p><img src="assets/010-jvm/copy.png" alt="img"></p>
+<img src="/2019/10/java/jvm/copy.png" class="">
+
 <h5 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h5><p>  标记-整理算法采用标记-清除算法一样的方式进行对象的标记，但在清除时不同，在回收不存活的对象占用的空间后，会将所有的存活对象往左端空闲空间移动，并更新对应的指针。</p>
 <p>标记-整理算法是在标记-清除算法的基础上，又进行了对象的移动，因此成本更高，但是却解决了内存碎片的问题。具体流程见下图：</p>
-<p><img src="assets/010-jvm/Mark-Compact.jpg" alt="img"></p>
+<img src="/2019/10/java/jvm/Mark-Compact.jpg" class="">
+
 <h5 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h5><p>  分代收集算法是目前大部分JVM的垃圾收集器采用的算法。它的核心思想是根据对象存活的生命周期将内存划分为若干个不同的区域。一般情况下将堆区划分为老年代（Tenured Generation）和新生代（Young Generation），在堆区之外还有一个代就是永久代（Permanet Generation）。老年代的特点是每次垃圾收集时只有少量对象需要被回收，而新生代的特点是每次垃圾回收时都有大量的对象需要被回收，那么就可以根据不同代的特点采取最适合的收集算法。</p>
-<p><img src="assets/010-jvm/generational-collection.png" alt="img"></p>
+<img src="/2019/10/java/jvm/generational-collection.png" class="">
+
 <ul>
 <li><p><strong>年轻代（Young Generation）的回收算法</strong></p>
 <ul>
@@ -625,7 +640,8 @@
 </ul>
 <p>  用于存放静态文件，如Java类、方法等。持久代对垃圾回收没有显著影响，但是有些应用可能动态生成或者调用一些class，在这种时候需要设置一个比较大的持久代空间来存放这些运行过程中新增的类。持久代也称方法区</p>
 <h4 id="常见的垃圾收集器"><a href="#常见的垃圾收集器" class="headerlink" title="常见的垃圾收集器"></a>常见的垃圾收集器</h4><p>下面一张图是HotSpot虚拟机包含的所有收集器，图是借用过来滴：</p>
-<p><img src="assets/010-jvm/HotSpot-collection.png" alt="img"></p>
+<img src="/2019/10/java/jvm/HotSpot-collection.png" class="">
+
 <ul>
 <li>Serial收集器（复制算法)<br>新生代单线程收集器，标记和清理都是单线程，优点是简单高效。是client级别默认的GC方式，可以通过<code>-XX:+UseSerialGC</code>来强制指定。</li>
 <li>Serial Old收集器(标记-整理算法)<br>老年代单线程收集器，Serial收集器的老年代版本。</li>
@@ -686,8 +702,8 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/011-classloader/" rel="prev" title="Java类加载机制">
-                  Java类加载机制 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/10/java/classLoader/" rel="prev" title="classLoader">
+                  classLoader <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -734,7 +750,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <img class="site-author-image" itemprop="image" alt="zkzlx"
-    src="/uploads/custom-logo.jpg">
+    src="/images/custom-logo.jpg">
   <p class="site-author-name" itemprop="name">zkzlx</p>
   <div class="site-description" itemprop="description">吃饭、睡觉、写代码、周而复始</div>
 </div>
@@ -743,7 +759,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -756,7 +772,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
